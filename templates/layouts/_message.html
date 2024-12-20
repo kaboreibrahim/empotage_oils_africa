@@ -1,0 +1,29 @@
+{% for message in messages %}
+    <div class="container-fluid">
+        <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>{{ message|safe }}</strong>
+        </div>
+    </div>
+{% endfor %}
+
+<script>
+    // Sélectionnez toutes les divs d'alerte
+    const alertDivs = document.querySelectorAll('.alert');
+
+    // Parcourez chaque div d'alerte et définissez un délai pour les masquer avec une transition d'opacité
+    alertDivs.forEach(function(alertDiv) {
+        setTimeout(function() {
+            alertDiv.style.transition = 'opacity 0.5s';
+            alertDiv.style.opacity = '0';
+            setTimeout(function() {
+                alertDiv.style.display = 'none';
+            }, 1000); // Correspond à la durée de la transition
+        }, 10000);
+    });
+</script>
+<style>
+    .alert {
+        transition: opacity 0.5s ease;
+    }
+    
+</style>

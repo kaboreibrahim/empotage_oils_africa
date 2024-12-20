@@ -1,0 +1,18 @@
+{
+    "sourceFile": "conteneurs/templates/pages/Dossier/Dossier_confirm_delete_Nigeria.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1734632419423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1734632419423,
+            "name": "Commit-0",
+            "content": "{% extends 'layouts/base.html' %}\n{% block content %}\n\n<div class=\"container mt-5\">\n    <h2>Confirmer la suppression</h2>\n    <p>Êtes-vous sûr de vouloir supprimer \"{{ object }}\" ?</p>\n    <form method=\"post\">\n      {% csrf_token %}\n      <button type=\"submit\" class=\"btn btn-danger\">Supprimer</button>\n      <a href=\"{% url 'Dossier_list_nigeria' %}\" class=\"btn btn-secondary\">Annuler</a>\n    </form>\n  </div>\n\n\n{% endblock %}\n"
+        }
+    ]
+}

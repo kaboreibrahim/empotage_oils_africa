@@ -1,0 +1,18 @@
+{
+    "sourceFile": "conteneurs/templates/pages/Dossier_selection/conteneur_create.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1734392678247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1734392678247,
+            "name": "Commit-0",
+            "content": "{% extends 'layouts/base.html' %}\n{% load crispy_forms_tags %}\n\n{% block content %}\n  <div class=\"container mt-5\">\n    <h1 class=\"mb-4\">Gérer les conteneurs du dossier {{ dossier.TRD }}</h1>\n\n    <!-- Formulaire pour gérer les conteneurs -->\n    <form id=\"conteneur-formset\" method=\"post\" enctype=\"multipart/form-data\">\n      {% csrf_token %}\n      {{ formset.management_form }}\n      <div id=\"formset-container\">\n        {% for form in formset %}\n          <div class=\"card mb-3\">\n            <div class=\"card-body\">\n              {% crispy form %}\n            </div>\n          </div>\n        {% endfor %}\n      </div>\n\n      <!-- Bouton pour ajouter un conteneur -->\n      <button type=\"button\" class=\"btn btn-primary float-right ml-3\" id=\"add-conteneur-btn\">\n        <i class=\"bi bi-plus-lg\"></i> + Ajouter un conteneur\n      </button>\n\n     \n    </form>\n\n    <!-- Afficher les erreurs de validation -->\n    {% if formset.errors %}\n      <div class=\"alert alert-danger mt-3\">\n        <ul>\n          {% for form in formset %}\n            {% for field in form %}\n              {% for error in field.errors %}\n                <li>{{ error }}</li>\n              {% endfor %}\n            {% endfor %}\n          {% endfor %}\n        </ul>\n      </div>\n    {% endif %}\n  </div>\n\n  <!-- Template pour le formulaire de conteneur -->\n  <script type=\"text/template\" id=\"conteneur-form-template\">\n    <div class=\"card mb-3\">\n      <div class=\"card-body\">\n        {{ formset.empty_form|crispy }}\n      </div>\n    </div> \n  </script>\n\n  <!-- JavaScript pour gérer l'ajout dynamique de formulaires -->\n  <script>\n    document.addEventListener('DOMContentLoaded', function() {\n      const formsetContainer = document.getElementById('formset-container');\n      const addConteneurBtn = document.getElementById('add-conteneur-btn');\n      const formTemplate = document.getElementById('conteneur-form-template').innerHTML;\n      const totalFormsInput = document.getElementById('id_form-TOTAL_FORMS');\n\n      addConteneurBtn.addEventListener('click', function() {\n        const formCount = parseInt(totalFormsInput.value);\n        let newForm = formTemplate.replace(/__prefix__/g, formCount);\n\n        // Insérer le nouveau formulaire dans le container\n        formsetContainer.insertAdjacentHTML('beforeend', newForm);\n\n        // Mettre à jour le compteur total des formulaires\n        totalFormsInput.value = formCount + 1;\n      });\n    });\n  </script>\n{% endblock %}\n"
+        }
+    ]
+}

@@ -1,0 +1,229 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1>Détails du Conteneur : {{ conteneur.reference }}</h1>
+
+    <div class="card mt-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="card-title">Référence : {{ conteneur.reference }}</h5>
+            <p class="card-text"><strong>État :</strong> {{ conteneur.etat }}</p>
+            {% if conteneur.photo_avant %}
+              <p class="card-text"><strong>Photo Avant :</strong>
+                <a href="#" data-toggle="modal" data-target="#photoAvantModal">Voir la photo avant</a>
+              </p>
+            {% endif %}
+            {% if conteneur.photo_derriere %}
+              <p class="card-text"><strong>Photo Derrière :</strong>
+                <a href="#" data-toggle="modal" data-target="#photoDerriereModal">Voir la photo derrière</a>
+              </p>
+            {% endif %}
+            {% if conteneur.photo_interieur %}
+              <p class="card-text"><strong>Photo Intérieur :</strong>
+                <a href="#" data-toggle="modal" data-target="#photoInterieurModal">Voir la photo intérieur</a>
+              </p>
+            {% endif %}
+            {% if conteneur.photo_lateral_gauche %}
+            <p class="card-text"><strong>Photo lateral gauche :</strong>
+              <a href="#" data-toggle="modal" data-target="#photoLateralGaucheModal">Voir la photo  lateral gauche</a>
+            </p>
+          {% endif %}
+            {% if conteneur.photo_lateral_droit %}
+              <p class="card-text"><strong>Photo lateral droit :</strong>
+                <a href="#" data-toggle="modal" data-target="#photoLateralDroitModal">Voir la photo  lateral droit</a>
+              </p>
+            {% endif %}
+            
+            <p class="card-text"><strong>Poids Brut :</strong> {{ conteneur.poids_brute|default:"N/A" }} Kg</p>
+            <p class="card-text"><strong>Poids Équipements :</strong> {{ conteneur.poids_equipements|default:"N/A" }} Kg</p>
+            <p class="card-text"><strong>Poids Net :</strong> {{ conteneur.poids_net|default:"N/A" }} Kg</p>
+            <p class="card-text">
+              {% if conteneur.statut == 'aconer' %}
+                <strong>empoter <span class="dot dot-lg bg-success mr-1"></span></strong>
+              {% else %}
+                <strong>Non empoter <span class="dot dot-lg bg-danger mr-1"></span></strong>
+              {% endif %}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p class="card-text"><strong>Numéro Heating Pad :</strong> {{ conteneur.numero_heating_pad|default:"N/A" }}</p>
+            {% if conteneur.photo_heating_pad %}
+              <p class="card-text"><strong>Photo Heating Pad :</strong>
+                <a href="#" data-toggle="modal" data-target="#photoHeatingPadModal">Voir la photo heating pad</a>
+              </p>
+            {% endif %}
+            <p class="card-text"><strong>Numéro Flexitank :</strong> {{ conteneur.numero_flexitank|default:"N/A" }}</p>
+            {% if conteneur.photo_flexitank %}
+              <p class="card-text"><strong>Photo Flexitank :</strong>
+                <a href="#" data-toggle="modal" data-target="#photoFlexitankModal">Voir la photo flexitank</a>
+              </p>
+            {% endif %}
+            <p class="card-text"><strong>Numéro Plomb :</strong> {{ conteneur.numero_plomb|default:"N/A" }}</p>
+            {% if conteneur.photo_plomb %}
+              <p class="card-text"><strong>Photo Plomb :</strong>
+                <a href="#" data-toggle="modal" data-target="#photoPlombModal">Voir la photo plomb</a>
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="{% url 'view_conteneurs' dossier_id=conteneur.dossier.id %}" class="btn btn-secondary mt-3">Retour à la liste des conteneurs</a>
+  </div>
+
+  <!-- Modal pour la photo avant -->
+  {% if conteneur.photo_avant %}
+    <div class="modal fade" id="photoAvantModal" tabindex="-1" role="dialog" aria-labelledby="photoAvantModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="photoAvantModalLabel">Photo Avant</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ conteneur.photo_avant.url }}" alt="Photo Avant" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Modal pour la photo derrière -->
+  {% if conteneur.photo_derriere %}
+    <div class="modal fade" id="photoDerriereModal" tabindex="-1" role="dialog" aria-labelledby="photoDerriereModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="photoDerriereModalLabel">Photo Derrière</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ conteneur.photo_derriere.url }}" alt="Photo Derrière" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  
+
+  <!-- Modal pour la photo intérieur -->
+  {% if conteneur.photo_interieur %}
+    <div class="modal fade" id="photoInterieurModal" tabindex="-1" role="dialog" aria-labelledby="photoInterieurModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="photoInterieurModalLabel">Photo Intérieur</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ conteneur.photo_interieur.url }}" alt="Photo Intérieur" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Modal pour la photo lateral gauche -->
+  {% if conteneur.photo_interieur %}
+    <div class="modal fade" id="photoLateralGaucheModal" tabindex="-1" role="dialog" aria-labelledby="photoLateralGaucheModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="photoLateralGaucheModalLabel">Photo lateral gauche</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ conteneur.photo_lateral_gauche.url }}" alt="Photo lateral droit" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Modal pour la photo droit -->
+  {% if conteneur.photo_interieur %}
+    <div class="modal fade" id="photoLateralDroitModal" tabindex="-1" role="dialog" aria-labelledby="photoLateralDroitModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="photoLateralDroitModalLabel">Photo lateral gauche</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ conteneur.photo_lateral_droit.url }}" alt="Photo lateral gauche" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Modal pour la photo heating pad -->
+  {% if conteneur.photo_heating_pad %}
+    <div class="modal fade" id="photoHeatingPadModal" tabindex="-1" role="dialog" aria-labelledby="photoHeatingPadModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="photoHeatingPadModalLabel">Photo Heating Pad</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ conteneur.photo_heating_pad.url }}" alt="Photo Heating Pad" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Modal pour la photo flexitank -->
+  {% if conteneur.photo_flexitank %}
+    <div class="modal fade" id="photoFlexitankModal" tabindex="-1" role="dialog" aria-labelledby="photoFlexitankModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="photoFlexitankModalLabel">Photo Flexitank</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ conteneur.photo_flexitank.url }}" alt="Photo Flexitank" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Modal pour la photo plomb -->
+  {% if conteneur.photo_plomb %}
+    <div class="modal fade" id="photoPlombModal" tabindex="-1" role="dialog" aria-labelledby="photoPlombModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="photoPlombModalLabel">Photo Plomb</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ conteneur.photo_plomb.url }}" alt="Photo Plomb" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "conteneurs/templates/pages/Dossier_Acconage/conteneur_ajout.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1734433839838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1734433839838,
+            "name": "Commit-0",
+            "content": "{% extends 'layouts/base.html' %}\n{% load crispy_forms_tags %}\n\n{% block content %}\n{% load crispy_forms_tags %}\n\n\n    <div class=\"container\">\n        <h3> Habillage et empotage  Référence : {{ conteneur.reference }}</h3>\n        <form method=\"POST\" enctype=\"multipart/form-data\">\n            {% csrf_token %}\n            <!-- Utiliser crispy pour le rendu du formulaire -->\n            {{ form|crispy }}\n            <div class=\"form-group\">\n                <button type=\"submit\" class=\"btn btn-primary\">Enregistrer</button>\n            </div>\n        </form>\n    </div>\n\n\n\n{% endblock %}\n\n\n"
+        }
+    ]
+}
