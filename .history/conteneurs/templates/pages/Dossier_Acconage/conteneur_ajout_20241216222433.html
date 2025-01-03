@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+    <div class="container">
+        <h3> Habillage et empotage du  Conteneur Référence : {{ conteneur.reference }}</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Utiliser crispy pour le rendu du formulaire -->
+            {{ form|crispy }}
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+
+
+
+{% endblock %}
+
+

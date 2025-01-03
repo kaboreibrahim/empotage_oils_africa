@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <h1>Modifier le Conteneur Ref :{{conteneur.reference}}</h1>
+
+    <!-- Afficher les messages de succès ou d'erreur -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Formulaire de modification du conteneur -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+
+    <!-- Lien pour retourner à la liste des conteneurs -->
+</div>
+{% endblock %}
